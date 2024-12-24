@@ -1,0 +1,19 @@
+.main-container{
+    background-color:rgba(165, 42, 42, 0.76);
+    height: 390px;
+    width: 390px;
+    margin: 50px auto;
+    box-shadow: 1px 1px 5px 3px grey;;
+}
+.cell-container{
+    display: flex;
+}
+.cell{
+    height: 120px;
+    width: 120px;
+    background-color: #fff;
+    margin: 5px;
+}
+.heading{
+    text-align: center;
+}
