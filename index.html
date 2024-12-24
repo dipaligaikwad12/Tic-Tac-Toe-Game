@@ -27,6 +27,28 @@
             <div class="cell">9</div>
         </div>
     </div>
+
+    <script>
+        const board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
+        let currentPlayer = "P1";
+
+        const renderBoard=() => {
+            const boxes = document.querySelectorAll(".cell");
+            boxes.forEach((box, i) => {
+                if (board[i] == "P1") {
+                    box.innerHTML = '<img class="player" src="p1.png" alt="X">';
+                }
+                else if (board[i] == "P2") {
+                    box.innerHTML = '<img class="player" src="p2.png" alt="o">';
+                }
+                else {
+                    box.innerHTML = "";
+                }
+            });
+        };
+        renderBoard();
+
+    </script>
 </body>
 
 </html>
