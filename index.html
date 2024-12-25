@@ -10,36 +10,38 @@
 
 <body>
     <h1 class="heading">Tic Tac Toe</h1>
+    <p class="current-player">current-player:-<span id="currentplayer"> X</span></p>
     <div class="main-container">
         <div class="cell-container">
-            <div class="cell">1</div>
-            <div class="cell">2</div>
-            <div class="cell">3</div>
+            <div class="cell" onclick="selectBox(0)"></div>
+            <div class="cell" onclick="selectBox(1)"></div>
+            <div class="cell" onclick="selectBox(2)"></div>
         </div>
         <div class="cell-container">
-            <div class="cell">4</div>
-            <div class="cell">5</div>
-            <div class="cell">6</div>
+            <div class="cell" onclick="selectBox(3)"></div>
+            <div class="cell" onclick="selectBox(4)"></div>
+            <div class="cell" onclick="selectBox(5)"></div>
         </div>
         <div class="cell-container">
-            <div class="cell">7</div>
-            <div class="cell">8</div>
-            <div class="cell">9</div>
+            <div class="cell" onclick="selectBox(6)"></div>
+            <div class="cell" onclick="selectBox(7)"></div>
+            <div class="cell" onclick="selectBox(8)"></div>
         </div>
+        <button class="reset" onclick="resetBoard()">Reset </button>
     </div>
 
     <script>
         const board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
-        let currentPlayer = "P1";
+        let currentPlayer = "O";
 
-        const renderBoard=() => {
+        function renderBoard() {
             const boxes = document.querySelectorAll(".cell");
             boxes.forEach((box, i) => {
-                if (board[i] == "P1") {
-                    box.innerHTML = '<img class="player" src="p1.png" alt="X">';
+                if (board[i] === "X") {
+                    box.innerHTML = '<img height="90px" src="p1.png" alt="X"/>';
                 }
-                else if (board[i] == "P2") {
-                    box.innerHTML = '<img class="player" src="p2.png" alt="o">';
+                else if (board[i] === "O") {
+                    box.innerHTML = '<img height="90px" src="p2.png" alt="O"/>';
                 }
                 else {
                     box.innerHTML = "";
@@ -47,6 +49,74 @@
             });
         };
         renderBoard();
+
+        function selectBox(num) {
+            if (board[num] !== -1) {
+                alert("Invalid Move")
+                return;
+            }
+            board[num] = currentPlayer;
+
+            if (currentPlayer === "O") {
+                currentPlayer = "X";
+            }
+            else {
+                currentPlayer = "O";
+            }
+            const currentPlayerEle = document.getElementById("currentplayer");
+            currentPlayerEle.innerText = currentPlayer;
+            renderBoard();
+            checkWinner();
+        }
+        function resetBoard() {
+            board.fill(-1);
+            renderBoard();
+        }
+
+        function isPlayerPresent(places, player) {
+            const [a, b, c] = places;
+            return (
+                board[a] === player && board[b] === player && board[c] === player
+            );
+        }
+
+        function checkWinner() {
+            if (isPlayerPresent([0, 1, 2], "X")) {
+                alert("Player X wins");
+            } else if (isPlayerPresent([3, 4, 5], "X")) {
+                alert("Player X wins");
+            } else if (isPlayerPresent([6, 7, 8], "X")) {
+                alert("Player X wins");
+            } else if (isPlayerPresent([0, 4, 8], "X")) {
+                alert("Player X wins");
+            } else if (isPlayerPresent([2, 4, 6], "X")) {
+                alert("Player X wins");
+            } else if (isPlayerPresent([0, 3, 6], "X")) {
+                alert("Player X wins");
+            } else if (isPlayerPresent([1, 4, 7], "X")) {
+                alert("Player X wins");
+            } else if (isPlayerPresent([2, 5, 8], "X")) {
+                alert("Player X wins");
+            }
+
+            if (isPlayerPresent([0, 1, 2], "O")) {
+                alert("Player O wins");
+            } else if (isPlayerPresent([3, 4, 5], "O")) {
+                alert("Player O wins");
+            } else if (isPlayerPresent([6, 7, 8], "O")) {
+                alert("Player O wins");
+            } else if (isPlayerPresent([0, 4, 8], "O")) {
+                alert("Player O wins");
+            } else if (isPlayerPresent([2, 4, 6], "O")) {
+                alert("Player O wins");
+            } else if (isPlayerPresent([0, 3, 6], "O")) {
+                alert("Player O wins");
+            } else if (isPlayerPresent([1, 4, 7], "O")) {
+                alert("Player O wins");
+            } else if (isPlayerPresent([2, 5, 8], "O")) {
+                alert("Player O wins");
+            }
+        }
 
     </script>
 </body>
